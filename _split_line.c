@@ -25,8 +25,8 @@ char **_split_line(char *line)
 	}
 	tokens = strtok(line, delimiters);
 
-	/**if (tokens == NULL)
-		printf("canot tokenize");**/
+	/** if (tokens == NULL) **/
+		/** printf("canot tokenize"); **/
 
 	while (tokens != NULL)
 	{

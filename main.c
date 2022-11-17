@@ -34,8 +34,8 @@ int main(int argc __attribute__ ((unused)),
 			free(lineptr);
 		}
 		write(STDOUT_FILENO, lineptr, linelen);
-		/**if (w > 0)
-			write(STDOUT_FILENO, "\n", 1);**/
+		/**if (w > 0)**/
+			/**write(STDOUT_FILENO, "\n", 1);**/
 		toks = _split_line(lineptr);
 		/**printf("My Tokens are: %s", *toks);**/
 		shell_exec(toks);
