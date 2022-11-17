@@ -1,4 +1,4 @@
-include "shell.h"
+#include "shell.h"
 /**
  * _split_line - function that splits a line into tokens
  * @line: pointer to the line to split
@@ -6,7 +6,7 @@ include "shell.h"
  */
 char **_split_line(char *line)
 {
-	ssize_t token_siz;
+	ssize_t token_size;
 	char *tokens;
 	int i = 0;
 	char **token_arr;
@@ -25,8 +25,8 @@ char **_split_line(char *line)
 	}
 	tokens = strtok(line, delimiters);
 
-	if (tokens == NULL)
-		printf("canot tokenize");
+	/**if (tokens == NULL)
+		printf("canot tokenize");**/
 
 	while (tokens != NULL)
 	{
@@ -36,12 +36,12 @@ char **_split_line(char *line)
 			perror("Unable to allocate buffer");
 			return (NULL);
 		}
-		printf("toks: %s", tokens);
-		/*token_arr[i] = tokens;*/
+		/**printf("toks: %s", tokens);**/
+		/**token_arr[i] = tokens;**/
 		_strcpy(token_arr[i], tokens);
 		tokens = strtok(NULL, delimiters);
 		i++;
-		/* token_arr[i] = tokens; i++; tokens = strtok(NULL, delimiters)*/
+		/** token_arr[i] = tokens; i++; tokens = strtok(NULL, delimiters)**/
 	}
 	token_arr[i] = NULL;
 	return (token_arr);
