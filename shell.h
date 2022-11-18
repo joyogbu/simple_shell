@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <sys/types.h>
+#include <errno.h>
 #include <sys/wait.h>
 
 #define BUF_SIZE 1024
@@ -21,6 +22,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _getchar(void);
 int _getline(char **lineptr);
 char **_split_line(char *line);
-void shell_exec(char **args);
+void shell_exec(char **args, char *name, int circle);
 
 #endif

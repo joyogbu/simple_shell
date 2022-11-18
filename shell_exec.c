@@ -3,20 +3,39 @@
 /**
  * shell_exec - function to execute shell commands
  * @args: list of commands
+ * @name: name of the program
+ * @circle: number of times my loop is called
  * Return: nothing
  */
 
-void shell_exec(char **args)
+void shell_exec(char **args, char *name, int circle)
 {
 	char * const newenvp[] = {NULL};
 	/*char *new[100];*/
 	pid_t c_pid;
 	int status;
 	char *comm = args[0];
+	/**const char *val;**/
+	/**char *path = malloc(sizeof(char) * 10);**/
+	/**extern char **environ;**/
+	/**while(environ[i])**/
+		/**printf("%s", environ[i++]);**/
+	/**val = getenv("PATH");**/
+	/**puts(val);**/
+	/**if(strchr(args[0], '/') != NULL)**/
+	/**{**/
+		/**check = 1;**/
+		/**printf("yes");**/
+		/**_strcpy(path, args[0]);**/
+	/**}**/
+	/**else**/
+	/**{**/
+		/**printf("no");**/
+		/**_strcpy(path, "/bin/");**/
+		/**_strcat(path, comm);**/
+	/**}**/
 	/**char  path[128] = "/bin/";**/
-
 	/**_strcpy(path, "/bin/");**/
-
 	/**if (!*args)**/
 		/**comm = "";**/
 	/**_strcat(path, comm);**/
@@ -25,13 +44,11 @@ void shell_exec(char **args)
 	c_pid = fork();
 	if (c_pid == 0)
 	{
-		/**printf("Command is: %s", comm);**/
-		/*printf("i got: %s", path);*/
 		if (execve(comm, args, newenvp) == -1)
 		/*if (execve(path, new, newenvp) == -1)*/
 		{
-			/**printf("\n%s doesnt exist", args[0]);**/
-			perror(": Command not found");
+			/*perror(": Command not found");*/
+			printf("%s: %d: %s: not found\n", name, circle, args[0]);
 			exit(1);
 		}
 	}
