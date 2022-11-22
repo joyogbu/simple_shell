@@ -44,8 +44,33 @@ int _getline(char **lineptr)
 	buffer = malloc(sizeof(char) * n_size + 1);
 	if (buffer == NULL)
 		return (-1);
+	/*while (1)*/
+	/*{*/
+		/*c = _getchar();*/
 	while ((c = _getchar()) != '\n')
 	{
+		if (c == EOF)
+		{
+			if (i == 0)
+			{
+				free(buffer);
+				return (-1);
+			}
+			break;
+		}
+		/*if (c == EOF || c == '\n')*/
+		/*{*/
+			/**printf("endoffile");**/
+			/*buffer[i] = '\0';*/
+			/*break;*/
+		/*}*/
+		else
+		{
+			buffer[i] = c;
+			i++;
+		}
+		/*i++;*/
+
 		if (i == n_size - 1)
 		{
 			n_size += BUF_SIZE;
@@ -55,17 +80,6 @@ int _getline(char **lineptr)
 				perror("Error: Cannot Reallocate");
 				return (-1);
 			}
-		}
-		if (c == EOF)
-		{
-			if (i == 0)
-				return (-1);
-			break;
-		}
-		else
-		{
-			buffer[i] = c;
-			i++;
 		}
 	}
 	buffer[i] = '\0';

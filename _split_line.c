@@ -8,17 +8,18 @@
 char **_split_line(char *line)
 {
 	ssize_t token_size;
-	char *tokens;
+	char *tokens = NULL;
 	int i = 0;
-	char **token_arr;
+	char **token_arr = NULL;
 	char *delimiters = " \t\r\n";
 
 	token_size = BUF_SIZE;
 	if (line == NULL)
+	{
 		return (NULL);
+	}
 	token_size = _strlen(line);
 	token_arr = malloc(sizeof(char *) * token_size);
-
 	if (token_arr == NULL)
 	{
 		perror("Error: Could not allocate space");
@@ -26,11 +27,8 @@ char **_split_line(char *line)
 		exit(EXIT_FAILURE);
 	}
 	tokens = strtok(line, delimiters);
-	/** if (tokens == NULL) **/
-		/** printf("canot tokenize"); **/
 	while (tokens != NULL)
 	{
-		/*_strcpy(token_arr[i], tokens);*/
 		token_arr[i] = tokens;
 		i++;
 		if (i >= token_size)

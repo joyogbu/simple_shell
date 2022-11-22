@@ -4,18 +4,20 @@
  * main - function display a shell prompt to execute a command
  * @argc: Number of arguments
  * @argv: actual arguments
+ * @envp: environment variables
  * Return: 0
  */
-
-int main(int argc __attribute__ ((unused)),
-		char **argv __attribute__ ((unused)), char **envp __attribute__ ((unused)))
+int main(int argc, char **argv, char **envp)
+/*int main(int argc __attribute__ ((unused)),*/
+ /*char **argv __attribute__ ((unused)), char**envp __attribute__ ((unused)))*/
 {
-	/**int w;**/
 	char **toks;
 	int linelen;
 	char *name;
 	int circle = 0;
 	char *lineptr = NULL;
+	(void)argc;
+	(void)envp;
 
 	while (1)
 	{
@@ -30,17 +32,20 @@ int main(int argc __attribute__ ((unused)),
 			{
 				write(STDOUT_FILENO, "\n", 1);
 			}
-			free(lineptr);
+			/*free(lineptr);*/
 			exit(EXIT_SUCCESS);
 		}
-		if (*lineptr == '\n')
+		if (linelen == 0)
+		{
+			/*free(lineptr);*/
+			continue;
+		}
+		toks = _split_line(lineptr);
+		if (*toks == NULL)
 		{
 			free(lineptr);
+			continue;
 		}
-		/*write(STDOUT_FILENO, lineptr, linelen);*/
-		/**if (w > 0)**/
-			/**write(STDOUT_FILENO, "\n", 1);**/
-		toks = _split_line(lineptr);
 		/**printf("My Tokens are: %s", *toks);**/
 		shell_exec(toks, name, circle);
 	}
