@@ -9,10 +9,13 @@ int _getline(char **lineptr);
 
 int _getchar(void)
 {
-	static char buf[BUF_SIZE];
+	char buf[BUF_SIZE];
+
+	/*char *buf;*/
 	static char *ch;
 	int r = 0;
 
+	/*buf = malloc(BUF_SIZE);*/
 	while (1)
 	{
 		r = read(STDIN_FILENO, buf, 1);
@@ -20,6 +23,7 @@ int _getchar(void)
 			break;
 		if (r > 0)
 			ch = buf;
+
 		return (*ch++);
 	}
 	return (EOF);
@@ -36,7 +40,8 @@ int _getline(char **lineptr)
 	char *buffer;
 	int n_size;
 	int i = 0;
-	char c = 'x';
+	/*char c = 'x';*/
+	int c;
 
 	fflush(STDIN_FILENO);
 
@@ -56,6 +61,8 @@ int _getline(char **lineptr)
 				free(buffer);
 				return (-1);
 			}
+			buffer[i] = '\0';
+			free(buffer);
 			break;
 		}
 		/*if (c == EOF || c == '\n')*/

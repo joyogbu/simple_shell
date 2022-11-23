@@ -11,7 +11,7 @@ int main(int argc, char **argv, char **envp)
 /*int main(int argc __attribute__ ((unused)),*/
  /*char **argv __attribute__ ((unused)), char**envp __attribute__ ((unused)))*/
 {
-	char **toks;
+	char **toks = NULL;
 	int linelen;
 	char *name;
 	int circle = 0;
@@ -32,12 +32,12 @@ int main(int argc, char **argv, char **envp)
 			{
 				write(STDOUT_FILENO, "\n", 1);
 			}
-			/*free(lineptr);*/
+			free(lineptr);
+			free(toks);
 			exit(EXIT_SUCCESS);
 		}
 		if (linelen == 0)
 		{
-			/*free(lineptr);*/
 			continue;
 		}
 		toks = _split_line(lineptr);
@@ -46,9 +46,9 @@ int main(int argc, char **argv, char **envp)
 			free(lineptr);
 			continue;
 		}
-		/**printf("My Tokens are: %s", *toks);**/
 		shell_exec(toks, name, circle);
 	}
+	free(toks);
 	free(lineptr);
 	return (0);
 }
