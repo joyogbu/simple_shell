@@ -30,7 +30,6 @@ int main(int argc, char **argv, char **envp)
 		linelen = _getline(&lineptr);
 		if (*lineptr == '\n')
 		{
-			printf("new line");
 			free(toks);
 			free(lineptr);
 		}
@@ -62,10 +61,9 @@ int main(int argc, char **argv, char **envp)
  */
 void _EOF(char *lineptr, char **toks)
 {
-	printf("EOF");
 	if (isatty(STDIN_FILENO))
 	{
-		printf("isatty");
+
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	free(toks);
