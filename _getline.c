@@ -49,12 +49,9 @@ int _getline(char **lineptr)
 	buffer = malloc(sizeof(char) * n_size + 1);
 	if (buffer == NULL)
 		return (-1);
-	/*while (1)*/
-	/*{*/
-		/*c = _getchar();*/
 	while ((c = _getchar()) != '\n')
 	{
-		if (c == EOF)
+		if (c == EOF || c == '\n')
 		{
 			if (i == 0)
 			{
@@ -62,7 +59,7 @@ int _getline(char **lineptr)
 				return (-1);
 			}
 			buffer[i] = '\0';
-			free(buffer);
+			/*free(buffer);*/
 			break;
 		}
 		/*if (c == EOF || c == '\n')*/

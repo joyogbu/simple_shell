@@ -11,7 +11,7 @@ char **_split_line(char *line)
 	char *tokens = NULL;
 	int i = 0;
 	char **token_arr = NULL;
-	char *delimiters = " \t\r\n";
+	char *delimiters = " \t\r";
 
 	token_size = BUF_SIZE;
 	if (line == NULL)
