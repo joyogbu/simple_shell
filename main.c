@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void _EOF(char *lineptr, char **toks);
+void _EOF(void);
 
 /**
  * main - function display a shell prompt to execute a command
@@ -28,14 +28,14 @@ int main(int argc, char **argv, char **envp)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "~$ ", 3);
 		linelen = _getline(&lineptr);
-		if (*lineptr == '\n')
+		if (linelen == '\n')
 		{
 			free(toks);
 			free(lineptr);
 		}
 		if (linelen == EOF)
 		{
-			_EOF(lineptr, toks);
+			_EOF();
 		}
 		if (linelen == 0)
 		{
@@ -44,29 +44,34 @@ int main(int argc, char **argv, char **envp)
 		toks = _split_line(lineptr);
 		if (*toks == NULL)
 		{
+			free(toks);
+			free(lineptr);
 			continue;
 		}
-		shell_exec(toks, name, circle);
+		if (strcmp(toks[0], "exit") == 0)
+			shell_exit();
+		else
+		{
+			shell_exec(toks, name, circle);
+		}
+		free(toks);
+		free(lineptr);
 	}
-	free(toks);
-	free(lineptr);
 	return (0);
 }
 
 /**
  * _EOF - handle end of file
  * Return: nothing
- * @lineptr: pointer to buffer to be freed if EOF
- * @toks: pointr to the splitted tokens
  */
-void _EOF(char *lineptr, char **toks)
+void _EOF(void)
+/*void _EOF(char *lineptr, char **toks)*/
 {
 	if (isatty(STDIN_FILENO))
 	{
-
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	free(toks);
-	free(lineptr);
+	/*free(toks);*/
+	/*free(lineptr);*/
 	exit(EXIT_SUCCESS);
 }

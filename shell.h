@@ -23,6 +23,6 @@ int _getchar(void);
 int _getline(char **lineptr);
 char **_split_line(char *line);
 void shell_exec(char **args, char *name, int circle);
-
+int shell_exit();
 
 #endif
