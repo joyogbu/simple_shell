@@ -50,13 +50,14 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		}
 		if (strcmp(toks[0], "exit") == 0)
-			shell_exit();
+			shell_exit(lineptr, toks);
 		else
 		{
 			shell_exec(toks, name, circle);
 		}
-		free(toks);
+		/*free(toks);*/
 		free(lineptr);
+		free(toks);
 	}
 	return (0);
 }

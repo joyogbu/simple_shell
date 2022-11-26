@@ -45,8 +45,8 @@ void _print_d(int n)
 
 void shell_exec(char **args, char *name, int circle)
 {
-	char * const newenvp[] = {NULL};
-	/*char *new[100];*/
+		char * const newenvp[] = {NULL};
+		/*char *new[100];*/
 	pid_t c_pid;
 	/*int status;*/
 	/*char c;*/
@@ -102,6 +102,7 @@ void shell_exec(char **args, char *name, int circle)
 			write(STDOUT_FILENO, ": ", 2);
 			write(STDOUT_FILENO, "not found\n", 10);
 			}
+			free(args);
 			exit(1);
 		}
 	}
