@@ -44,8 +44,9 @@ int main(int argc, char **argv, char **envp)
 		toks = _split_line(lineptr);
 		if (*toks == NULL)
 		{
-			free(toks);
+			/*free(toks);*/
 			free(lineptr);
+			free(toks);
 			continue;
 		}
 		if (strcmp(toks[0], "exit") == 0)

@@ -1,269 +1,138 @@
-==2850== Memcheck, a memory error detector
-==2850== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==2850== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==2850== Command: ./hsh
-==2850== Parent PID: 2520
-==2850== 
---2850-- 
---2850-- Valgrind options:
---2850--    --leak-check=full
---2850--    --show-leak-kinds=all
---2850--    --track-origins=yes
---2850--    --verbose
---2850--    --log-file=valgrind-out.txt
---2850-- Contents of /proc/version:
---2850--   Linux version 5.3.0-1032-aws (buildd@lgw01-amd64-026) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #34~18.04.2-Ubuntu SMP Fri Jul 24 10:06:28 UTC 2020
---2850-- 
---2850-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---2850-- Page sizes: currently 4096, max supported 4096
---2850-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---2850-- Reading syms from /simple_shell/hsh
---2850-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---2850--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---2850--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---2850--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---2850--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---2850--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---2850--   .. CRC is valid
---2850-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---2850--    object doesn't have a symbol table
---2850--    object doesn't have a dynamic symbol table
---2850-- Scheduler: using generic scheduler lock implementation.
---2850-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==2850== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-2850-by-???-on-6170f4588d23
-==2850== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-2850-by-???-on-6170f4588d23
-==2850== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-2850-by-???-on-6170f4588d23
-==2850== 
-==2850== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==2850== don't want to do, unless you know exactly what you're doing,
-==2850== or are doing some strange experiment):
-==2850==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=2850 ...command...
-==2850== 
-==2850== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==2850==   /path/to/gdb ./hsh
-==2850== and then give GDB the following command
-==2850==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=2850
-==2850== --pid is optional if only one valgrind process is running
-==2850== 
---2850-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---2850-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---2850-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---2850--    object doesn't have a symbol table
---2850-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---2850--    object doesn't have a symbol table
-==2850== WARNING: new redirection conflicts with existing -- ignoring it
---2850--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---2850--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---2850-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---2850-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---2850-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---2850--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---2850--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---2850--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---2850--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---2850--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---2850--   .. CRC is valid
---2850-- REDIR: 0x48f44b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f37b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f47e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f30d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f5c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x4910d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x4910850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x4910810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f36a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x4911f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x4910890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48fcbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x4910960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f3b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f4720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f5cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x48f48d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2850-- REDIR: 0x49dc410 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---2850-- REDIR: 0x48ee110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---2850-- REDIR: 0x48ee700 (libc.so.6:free) redirected to 0x483c9d0 (free)
-==2850== Invalid read of size 1
-==2850==    at 0x109CC0: _strlen (string_helpers.c:42)
-==2850==    by 0x109ACA: _split_line (_split_line.c:21)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== Invalid read of size 1
-==2850==    at 0x48F4377: strtok_r (strtok_r.c:49)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
---2850-- REDIR: 0x49d79b0 (libc.so.6:__strspn_sse42) redirected to 0x4843ef0 (strspn)
-==2850== Invalid read of size 1
-==2850==    at 0x4843F16: strspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x48F4388: strtok_r (strtok_r.c:56)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== Invalid read of size 1
-==2850==    at 0x4843F59: strspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x48F4388: strtok_r (strtok_r.c:56)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49491 is 1 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== Invalid read of size 1
-==2850==    at 0x48F438C: strtok_r (strtok_r.c:57)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a4949a is 10 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== Invalid free() / delete / delete[] / realloc()
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1096ED: main (main.c:48)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== 
-==2850== HEAP SUMMARY:
-==2850==     in use at exit: 0 bytes in 0 blocks
-==2850==   total heap usage: 7 allocs, 8 frees, 3,221 bytes allocated
-==2850== 
-==2850== All heap blocks were freed -- no leaks are possible
-==2850== 
-==2850== ERROR SUMMARY: 25 errors from 6 contexts (suppressed: 0 from 0)
-==2850== 
-==2850== 1 errors in context 1 of 6:
-==2850== Invalid free() / delete / delete[] / realloc()
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1096ED: main (main.c:48)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== 
-==2850== 1 errors in context 2 of 6:
-==2850== Invalid read of size 1
-==2850==    at 0x48F438C: strtok_r (strtok_r.c:57)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a4949a is 10 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== 
-==2850== 1 errors in context 3 of 6:
-==2850== Invalid read of size 1
-==2850==    at 0x4843F16: strspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x48F4388: strtok_r (strtok_r.c:56)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== 
-==2850== 1 errors in context 4 of 6:
-==2850== Invalid read of size 1
-==2850==    at 0x48F4377: strtok_r (strtok_r.c:49)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== 
-==2850== 10 errors in context 5 of 6:
-==2850== Invalid read of size 1
-==2850==    at 0x4843F59: strspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x48F4388: strtok_r (strtok_r.c:56)
-==2850==    by 0x109B20: _split_line (_split_line.c:29)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49491 is 1 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== 
-==2850== 11 errors in context 6 of 6:
-==2850== Invalid read of size 1
-==2850==    at 0x109CC0: _strlen (string_helpers.c:42)
-==2850==    by 0x109ACA: _split_line (_split_line.c:21)
-==2850==    by 0x1096C5: main (main.c:44)
-==2850==  Address 0x4a49490 is 0 bytes inside a block of size 11 free'd
-==2850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x10969F: main (main.c:34)
-==2850==  Block was alloc'd at
-==2850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2850==    by 0x1094D4: _getline (_getline.c:90)
-==2850==    by 0x10967E: main (main.c:30)
-==2850== 
-==2850== ERROR SUMMARY: 25 errors from 6 contexts (suppressed: 0 from 0)
+==3039== Memcheck, a memory error detector
+==3039== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3039== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==3039== Command: ./hsh
+==3039== Parent PID: 2890
+==3039== 
+--3039-- 
+--3039-- Valgrind options:
+--3039--    --leak-check=full
+--3039--    --show-leak-kinds=all
+--3039--    --track-origins=yes
+--3039--    --verbose
+--3039--    --log-file=valgrind-out.txt
+--3039-- Contents of /proc/version:
+--3039--   Linux version 5.3.0-1032-aws (buildd@lgw01-amd64-026) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #34~18.04.2-Ubuntu SMP Fri Jul 24 10:06:28 UTC 2020
+--3039-- 
+--3039-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--3039-- Page sizes: currently 4096, max supported 4096
+--3039-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--3039-- Reading syms from /simple_shell/hsh
+--3039-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--3039--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--3039--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--3039--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--3039--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--3039--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--3039--   .. CRC is valid
+--3039-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--3039--    object doesn't have a symbol table
+--3039--    object doesn't have a dynamic symbol table
+--3039-- Scheduler: using generic scheduler lock implementation.
+--3039-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==3039== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-3039-by-???-on-6170f4588d23
+==3039== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-3039-by-???-on-6170f4588d23
+==3039== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-3039-by-???-on-6170f4588d23
+==3039== 
+==3039== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==3039== don't want to do, unless you know exactly what you're doing,
+==3039== or are doing some strange experiment):
+==3039==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=3039 ...command...
+==3039== 
+==3039== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==3039==   /path/to/gdb ./hsh
+==3039== and then give GDB the following command
+==3039==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=3039
+==3039== --pid is optional if only one valgrind process is running
+==3039== 
+--3039-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--3039-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--3039-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--3039--    object doesn't have a symbol table
+--3039-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--3039--    object doesn't have a symbol table
+==3039== WARNING: new redirection conflicts with existing -- ignoring it
+--3039--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--3039--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--3039-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--3039-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--3039-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--3039--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--3039--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--3039--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--3039--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--3039--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--3039--   .. CRC is valid
+--3039-- REDIR: 0x48f44b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f37b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f47e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f30d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f5c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x4910d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x4910850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x4910810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f36a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x4911f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x4910890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48fcbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x4910960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f3b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f4720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f5cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x48f48d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--3039-- REDIR: 0x49dc410 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--3039-- REDIR: 0x48ee110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--3039-- REDIR: 0x48ee700 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--3039-- REDIR: 0x49d79b0 (libc.so.6:__strspn_sse42) redirected to 0x4843ef0 (strspn)
+--3039-- REDIR: 0x49d7730 (libc.so.6:__strcspn_sse42) redirected to 0x4843e10 (strcspn)
+--3039-- REDIR: 0x49d7ae0 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
+==3040== 
+==3040== HEAP SUMMARY:
+==3040==     in use at exit: 73 bytes in 2 blocks
+==3040==   total heap usage: 3 allocs, 1 frees, 1,098 bytes allocated
+==3040== 
+==3040== Searching for pointers to 2 not-freed blocks
+==3040== Checked 68,600 bytes
+==3040== 
+==3040== 9 bytes in 1 blocks are still reachable in loss record 1 of 2
+==3040==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3040==    by 0x1094D4: _getline (_getline.c:90)
+==3040==    by 0x10967E: main (main.c:30)
+==3040== 
+==3040== 64 bytes in 1 blocks are still reachable in loss record 2 of 2
+==3040==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3040==    by 0x109ADB: _split_line (_split_line.c:22)
+==3040==    by 0x1096C0: main (main.c:44)
+==3040== 
+==3040== LEAK SUMMARY:
+==3040==    definitely lost: 0 bytes in 0 blocks
+==3040==    indirectly lost: 0 bytes in 0 blocks
+==3040==      possibly lost: 0 bytes in 0 blocks
+==3040==    still reachable: 73 bytes in 2 blocks
+==3040==         suppressed: 0 bytes in 0 blocks
+==3040== 
+==3040== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3039== 
+==3039== HEAP SUMMARY:
+==3039==     in use at exit: 0 bytes in 0 blocks
+==3039==   total heap usage: 4 allocs, 4 frees, 2,123 bytes allocated
+==3039== 
+==3039== All heap blocks were freed -- no leaks are possible
+==3039== 
+==3039== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
