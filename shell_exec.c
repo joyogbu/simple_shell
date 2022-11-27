@@ -104,7 +104,7 @@ void shell_exec(char **args, char *name, int circle)
 			}
 			free(args);
 			free(comm);
-			exit(1);
+			exit(0);
 		}
 	}
 	if (c_pid < 0)
