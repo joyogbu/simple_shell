@@ -9,28 +9,38 @@ int _getline(char **lineptr);
 
 int _getchar(void)
 {
-	static char buf[BUF_SIZE + 1];
+	static char buf[BUF_SIZE];
 
 	/*char *buf;*/
 	static char *ch;
-	/*int r = 0;*/
-	int r = 0;
+	static int r;
+	static int i;
 
 	/*buf = malloc(sizeof(char) * BUF_SIZE + 1);*/
-	while (1)
+	/*while (1)*/
+	if (i >= r)
 	{
-		r = read(STDIN_FILENO, buf, 1);
-		if (r == 0)
-			break;
+		r = read(STDIN_FILENO, buf, 1024);
 		if (r > 0)
 		{
-			buf[r] = '\0';
 			ch = buf;
-		}
+			i = 0;
+		/*if (r == 0)*/
+			/*break;*/
+/*		if (r > 0)*/
+		/*{*/
+		/*	buf[r] = '\0';*/
+			/*ch = buf;*/
 		/*free(buf);*/
-		return (*ch++);
+			return (*(ch + i++));
+		}
+		else
+			return (EOF);
 	}
-	return (EOF);
+	else
+	{
+		return (*(ch + i++));
+	}
 }
 
 /**

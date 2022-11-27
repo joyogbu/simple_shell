@@ -49,11 +49,9 @@ void shell_exec(char **args, char *name, int circle)
 		/*char *new[100];*/
 	pid_t c_pid;
 	/*int status;*/
-	/*char c;*/
 	char *comm;
 
 	comm = args[0];
-	/*c = circle + '0';*/
 
 	/**const char *val;**/
 	/**char *path = malloc(sizeof(char) * 10);**/

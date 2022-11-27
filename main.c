@@ -28,11 +28,11 @@ int main(int argc, char **argv, char **envp)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "~$ ", 3);
 		linelen = _getline(&lineptr);
-		/*if (linelen == '\n')
-		{
-			free(lineptr);
-			free(toks);
-		}*/
+		/*if (linelen == '\n')*/
+		/*{*/
+			/*free(lineptr);*/
+			/*free(toks);*/
+		/*}*/
 		if (linelen == EOF)
 		{
 			_EOF();
