@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		}
 		if (strcmp(toks[0], "exit") == 0)
-			shell_exit(lineptr, toks);
+			shell_exit(argv, lineptr, toks);
 		else
 		{
 			shell_exec(toks, name, circle);

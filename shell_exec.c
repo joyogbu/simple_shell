@@ -103,6 +103,7 @@ void shell_exec(char **args, char *name, int circle)
 			write(STDOUT_FILENO, "not found\n", 10);
 			}
 			free(args);
+			free(comm);
 			exit(1);
 		}
 	}
