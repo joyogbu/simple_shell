@@ -9,21 +9,25 @@ int _getline(char **lineptr);
 
 int _getchar(void)
 {
-	char buf[BUF_SIZE];
+	static char buf[BUF_SIZE + 1];
 
 	/*char *buf;*/
 	static char *ch;
+	/*int r = 0;*/
 	int r = 0;
 
-	/*buf = malloc(BUF_SIZE);*/
+	/*buf = malloc(sizeof(char) * BUF_SIZE + 1);*/
 	while (1)
 	{
 		r = read(STDIN_FILENO, buf, 1);
 		if (r == 0)
 			break;
 		if (r > 0)
+		{
+			buf[r] = '\0';
 			ch = buf;
-
+		}
+		/*free(buf);*/
 		return (*ch++);
 	}
 	return (EOF);
