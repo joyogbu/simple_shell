@@ -27,7 +27,7 @@ int main(int argc, char **argv, char **envp)
 		name = argv[0];
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "~$ ", 3);
-		linelen = _getline(&lineptr);
+		linelen = gtline(&lineptr);
 		/*if (linelen == '\n')*/
 		/*{*/
 			/*free(lineptr);*/
