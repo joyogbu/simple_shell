@@ -45,10 +45,10 @@ void _print_d(int n)
 
 void shell_exec(char **args, char *name, int circle)
 {
-		char * const newenvp[] = {NULL};
-		/*char *new[100];*/
+	char * const newenvp[] = {NULL};
+	/*char *new[100];*/
 	pid_t c_pid;
-	/*int status;*/
+	int status;
 	char *comm;
 
 	comm = args[0];
@@ -111,9 +111,11 @@ void shell_exec(char **args, char *name, int circle)
 	}
 	else
 	{
-	/*	do {*/
-			wait(NULL);
-		/*} while (!WIFEXITED(status) && !WIFSIGNALED(status));*/
+		do {
+			/*wait(NULL);*/
+			waitpid(c_pid, &status, 0);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		/*printf("%d", WEXITSTATUS(status));*/
 	}
 }
 
