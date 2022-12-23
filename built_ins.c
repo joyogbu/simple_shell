@@ -13,5 +13,5 @@ int shell_exit(char **args, char *lineptr, char **toks)
 	free(toks);
 	free(lineptr);
 	/*free(args);*/
-	exit(EXIT_SUCCESS);
+	exit(2);
 }
