@@ -3,7 +3,7 @@
 int _putchar(char c);
 void _print_d(int n);
 void err_msg(char **args, char *name, int circle);
-void shell_exec(char **args, char *name,
+int shell_exec(char **args, char *name,
 int circle);
 
 /**
@@ -43,7 +43,7 @@ void _print_d(int n)
  * Return: nothing
  */
 
-void shell_exec(char **args, char *name, int circle)
+int shell_exec(char **args, char *name, int circle)
 {
 	char * const newenvp[] = {NULL};
 	/*char *new[100];*/
@@ -117,6 +117,7 @@ void shell_exec(char **args, char *name, int circle)
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 		/*printf("%d", WEXITSTATUS(status));*/
 	}
+	return (WEXITSTATUS(status));
 }
 
 /**

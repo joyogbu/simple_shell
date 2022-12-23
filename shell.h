@@ -22,7 +22,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _getchar(void);
 int gtline(char **lineptr);
 char **_split_line(char *line);
-void shell_exec(char **args, char *name, int circle);
+int shell_exec(char **args, char *name, int circle);
 int shell_exit();
 int _get_char(void);
 

@@ -7,11 +7,19 @@
  * @toks: double pointer to the tokenized string
  * Return: exit status 0
  */
-int shell_exit(char **args, char *lineptr, char **toks)
+int shell_exit(int ex_stat, char **args, char *lineptr, char **toks)
 {
 	(void)args;
+	/*printf("exit status: %d", ex_stat);*/
 	free(toks);
 	free(lineptr);
 	/*free(args);*/
-	exit(2);
+	if (ex_stat == 127)
+		exit(127);
+	else if (ex_stat == 1)
+		exit(1);
+	else if (ex_stat == 2)
+		exit(2);
+	else
+		exit(0);
 }

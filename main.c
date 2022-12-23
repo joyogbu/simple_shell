@@ -15,6 +15,7 @@ int main(int argc, char **argv, char **envp)
 {
 	char **toks = NULL;
 	int linelen;
+	int ex_stat;
 	char *name;
 	int circle = 0;
 	char *lineptr = NULL;
@@ -50,10 +51,10 @@ int main(int argc, char **argv, char **envp)
 			continue;
 		}
 		if (strcmp(toks[0], "exit") == 0)
-			shell_exit(argv, lineptr, toks);
+			shell_exit(ex_stat, argv, lineptr, toks);
 		else
 		{
-			shell_exec(toks, name, circle);
+			ex_stat = shell_exec(toks, name, circle);
 		}
 		/*free(toks);*/
 		free(lineptr);
