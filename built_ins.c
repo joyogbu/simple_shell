@@ -2,6 +2,7 @@
 
 /**
  * shell_exit - function that exits the shell
+ * @ex_stat: status returned from exit
  * @args: arguments parameters
  * @lineptr: pointer to buffer holding the commands enterd
  * @toks: double pointer to the tokenized string

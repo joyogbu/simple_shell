@@ -1,6 +1,7 @@
 #include "shell.h"
 
 void _EOF(void);
+void **_getenv(char **envi);
 
 /**
  * main - function display a shell prompt to execute a command
@@ -10,8 +11,6 @@ void _EOF(void);
  * Return: 0
  */
 int main(int argc, char **argv, char **envp)
-/*int main(int argc __attribute__ ((unused)),*/
- /*char **argv __attribute__ ((unused)), char**envp __attribute__ ((unused)))*/
 {
 	char **toks = NULL;
 	int linelen;
@@ -29,11 +28,6 @@ int main(int argc, char **argv, char **envp)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "~$ ", 3);
 		linelen = gtline(&lineptr);
-		/*if (linelen == '\n')*/
-		/*{*/
-			/*free(lineptr);*/
-			/*free(toks);*/
-		/*}*/
 		if (linelen == EOF)
 		{
 			_EOF();
@@ -42,7 +36,7 @@ int main(int argc, char **argv, char **envp)
 		{
 			continue;
 		}
-		toks = _split_line(lineptr);
+		toks = _split_line(lineptr, " \t\r");
 		if (*toks == NULL)
 		{
 			/*free(toks);*/
@@ -50,13 +44,13 @@ int main(int argc, char **argv, char **envp)
 			free(toks);
 			continue;
 		}
-		if (strcmp(toks[0], "exit") == 0)
+
+		if (_strcmp(toks[0], "exit") == 0)
 			shell_exit(ex_stat, argv, lineptr, toks);
 		else
 		{
 			ex_stat = shell_exec(toks, name, circle);
 		}
-		/*free(toks);*/
 		free(lineptr);
 		free(toks);
 	}
