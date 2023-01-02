@@ -29,6 +29,7 @@ int _putchar(char c);
 void _print_d(int n);
 char **_split_line(char *line, const char *delimiters);
 char **getPATH(const char *env);
+void _getenv(char **env);
 int shell_exec(char **args, char *name, int circle);
 int shell_exit(int ex_stat, char **args, char *lineptr, char **toks);
 int _get_char(void);

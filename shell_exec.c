@@ -89,13 +89,18 @@ int shell_exec(char **args, char *name, int circle)
 			
 		}
 
-		/*return (err);*/
+		
 		/*printf("exit %d", err);*/
 		
 	}
 	else
 	{
 		c_pid = fork();
+		if (c_pid < 0)
+		{
+			perror("Could not create a process");
+			return (1);
+		}
 		if (c_pid == 0)
 		{
 			if (execve(comm, args, newenvp) == -1)
@@ -105,18 +110,18 @@ int shell_exec(char **args, char *name, int circle)
 					err_msg(&args[0], name, circle);
 					err = 126;
 				}
-				else
+				/*else
 				{
 					err_msg2(&args[0], name, circle);
 					err = 127;
-				}
+				}*/
 				_exit(err);
 			}
 		}
-		else if (c_pid < 0)
+		/*else if (c_pid < 0)
 		{
 			perror("Could not create a process");
-		}
+		}*/
 		else
 		{
 			do {

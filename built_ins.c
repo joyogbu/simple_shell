@@ -17,7 +17,7 @@ int shell_exit(int ex_stat, char **args, char *lineptr, char **toks)
 	/*free(args);*/
 	if (ex_stat == 126)
 		exit(126);
-	if (ex_stat == 127)
+	else if (ex_stat == 127)
 		exit(127);
 	else if (ex_stat == 1)
 		exit(1);

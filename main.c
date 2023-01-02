@@ -1,7 +1,7 @@
 #include "shell.h"
 
 void _EOF(void);
-void **_getenv(char **envi);
+void _getenv(char **env);
 
 /**
  * main - function display a shell prompt to execute a command
@@ -44,6 +44,8 @@ int main(int argc, char **argv, char **envp)
 			free(toks);
 			continue;
 		}
+		if (_strcmp(toks[0], "env") == 0)
+			_getenv(environ);
 
 		if (_strcmp(toks[0], "exit") == 0)
 			shell_exit(ex_stat, argv, lineptr, toks);
@@ -71,4 +73,22 @@ void _EOF(void)
 	/*free(toks);*/
 	/*free(lineptr);*/
 	exit(EXIT_SUCCESS);
+}
+
+/**
+ * _getenv - function that prints the environment variables
+ * @env: pointer to the environment variables
+ * Return: Nothing
+ */
+void _getenv(char **env)
+{
+	size_t len = 0, i = 0;
+
+	while (env[i])
+	{
+		len = _strlen(env[i]);
+		write(STDOUT_FILENO, env[i], len);
+		write(STDOUT_FILENO, "\n", 1);
+		i++;
+	}
 }
