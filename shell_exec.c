@@ -89,7 +89,7 @@ int shell_exec(char **args, char *name, int circle)
 			
 		}
 
-		
+		return(err);
 		/*printf("exit %d", err);*/
 		
 	}
@@ -110,11 +110,11 @@ int shell_exec(char **args, char *name, int circle)
 					err_msg(&args[0], name, circle);
 					err = 126;
 				}
-				/*else
+				else
 				{
 					err_msg2(&args[0], name, circle);
 					err = 127;
-				}*/
+				}
 				_exit(err);
 			}
 		}
@@ -148,10 +148,9 @@ int shell_exec(char **args, char *name, int circle)
  */
 void err_msg(char **args, char *name, int circle)
 {
-	/*char *c*/
 	write(STDOUT_FILENO, name, _strlen(name));
 	write(STDOUT_FILENO, ": ", 2);
-	/*write(STDOUT_FILENO, c, 1);*/
+	/*write(STDOUT_FILENO, circle, 2);*/
 	_print_d(circle);
 	write(STDOUT_FILENO, ": ", 2);
 	write(STDOUT_FILENO, args[0], _strlen(args[0]));
@@ -168,12 +167,15 @@ void err_msg(char **args, char *name, int circle)
  */
 void err_msg2(char **args, char *name, int circle)
 {
-	write(STDOUT_FILENO, name, _strlen(name));
-	write(STDOUT_FILENO, ": ", 2);
-	_print_d(circle);
-	/*write(STDOUT_FILENO, &c, 1);*/
-	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, args[0], _strlen(args[0]));
-	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, "not found\n", 10);
+	char c;
+
+	c = circle + '0';
+	write(STDERR_FILENO, name, _strlen(name));
+	write(STDERR_FILENO, ": ", 2);
+	/*_print_d(circle);*/
+	write(STDERR_FILENO, &c, 1);
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, args[0], _strlen(args[0]));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, "not found\n", 10);
 }
