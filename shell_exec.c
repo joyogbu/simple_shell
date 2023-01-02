@@ -42,6 +42,7 @@ int shell_exec(char **args, char *name, int circle)
 	char * const newenvp[] = {"HOME=/root", "PATH=/bin:/sbin", NULL};
 	pid_t c_pid;
 	int status;
+	int err;
 	char *comm = NULL;
 	char tokens2[1024];
 	char tokens3[1024];
@@ -52,9 +53,10 @@ int shell_exec(char **args, char *name, int circle)
 	int flag = 0;
 	struct stat stats;
 
+	err = 0;
 	comm = args[0];
 	/*if(_strchr(comm, '/') == NULL)*/
-	if (comm[0] != '/')
+	if (comm[0] != '/' && comm[0] != '.')
 	{
 		flag = 1;
 		pathways = getPATH("PATH");
@@ -72,17 +74,24 @@ int shell_exec(char **args, char *name, int circle)
 		}
 		comm = tokens3;
 	}
-	if (stat(comm, &stats) != 0)
+	if (stat(comm, &stats) == -1)
 	{
 		if (errno == EACCES)
 		{
 			err_msg(&args[0], name, circle);
+			err = 126;
+			
 		}
 		else
 		{
 			err_msg2(&args[0], name, circle);
+			err = 127;
+			
 		}
-		return (-1);
+
+		/*return (err);*/
+		/*printf("exit %d", err);*/
+		
 	}
 	else
 	{
@@ -94,15 +103,17 @@ int shell_exec(char **args, char *name, int circle)
 				if (errno == EACCES)
 				{
 					err_msg(&args[0], name, circle);
+					err = 126;
 				}
 				else
 				{
 					err_msg2(&args[0], name, circle);
+					err = 127;
 				}
-				exit(0);
+				_exit(err);
 			}
 		}
-		if (c_pid < 0)
+		else if (c_pid < 0)
 		{
 			perror("Could not create a process");
 		}
@@ -112,12 +123,15 @@ int shell_exec(char **args, char *name, int circle)
 			/*wait(NULL);*/
 				waitpid(c_pid, &status, 0);
 			} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		/*printf("status: %d", WEXITSTATUS(status));*/
+		err = WEXITSTATUS(status);
 		}
 		if (flag == 1)
 		{
 		}
-		return (WEXITSTATUS(status));
+		/*return(err);*/
 	}
+	return (err);
 }
 
 /**
