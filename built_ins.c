@@ -12,9 +12,13 @@
  */
 int shell_exit(int ex_stat, char **args, char *lineptr, char **toks)
 {
-	char *var;
+	int status;
+	int code;
 	(void)args;
-	var = toks[1];
+	status = 0;
+	/*size_t max;
+
+	max = 999999999*/
 	/*printf("exit status: %d", ex_stat);*/
 	/*free(toks);*/
 	/*free(lineptr);*/
@@ -29,12 +33,16 @@ int shell_exit(int ex_stat, char **args, char *lineptr, char **toks)
 		exit(2);
 	else
 		exit(0);*/
-	if (var != NULL)
+	if (toks[1] != NULL)
 	{
+		status = atoi(toks[1]);
+		/*printf("status is %d", status);*/
+		if ((atoi(toks[1]) > 255))
+			code= status % 256;
 		free(toks);
                 free(lineptr);
-                exit((long int)(var));
-		/*exit(0);*/
+                /*exit((long int)(toks[1]));*/
+		exit(code);
 	}
 	else
 	{
