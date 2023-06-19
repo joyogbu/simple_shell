@@ -99,7 +99,7 @@ int shell_exec(char **args, char *name, int circle)
 		if (c_pid < 0)
 		{
 			perror("Could not create a process");
-			return (1);
+			exit (1);
 		}
 		if (c_pid == 0)
 		{
@@ -115,7 +115,7 @@ int shell_exec(char **args, char *name, int circle)
 					err_msg2(&args[0], name, circle);
 					err = 127;
 				}
-				_exit(err);
+				_exit(1);
 			}
 		}
 		/*else if (c_pid < 0)

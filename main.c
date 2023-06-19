@@ -14,7 +14,7 @@ int main(int argc, char **argv, char **envp)
 {
 	char **toks = NULL;
 	int linelen;
-	int ex_stat = 0;
+	int ex_stat;
 	char *name;
 	int circle = 0;
 	char *lineptr = NULL;
@@ -46,9 +46,12 @@ int main(int argc, char **argv, char **envp)
 		}
 		if (_strcmp(toks[0], "env") == 0)
 			_getenv(environ);
-
 		if (_strcmp(toks[0], "exit") == 0)
 			shell_exit(ex_stat, argv, lineptr, toks);
+		if (_strcmp(toks[0], "cd") == 0)
+		{
+			change_dir(toks);
+		}
 		else
 		{
 			ex_stat = shell_exec(toks, name, circle);
@@ -84,7 +87,7 @@ void _getenv(char **env)
 {
 	size_t len = 0, i = 0;
 
-	while (env[i])
+	while (env[i] != NULL)
 	{
 		len = _strlen(env[i]);
 		write(STDOUT_FILENO, env[i], len);
