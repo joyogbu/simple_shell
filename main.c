@@ -14,7 +14,7 @@ int main(int argc, char **argv, char **envp)
 {
 	char **toks = NULL;
 	int linelen;
-	int ex_stat;
+	int ex_stat = 0;
 	char *name;
 	int circle = 0;
 	char *lineptr = NULL;

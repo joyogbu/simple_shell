@@ -42,6 +42,7 @@ int shell_exec(char **args, char *name, int circle)
 	char * const newenvp[] = {"HOME=/root", "PATH=/bin:/sbin", NULL};
 	pid_t c_pid;
 	int status;
+	int error_code;
 	int err;
 	char *comm = NULL;
 	char tokens2[1024];
@@ -54,6 +55,7 @@ int shell_exec(char **args, char *name, int circle)
 	struct stat stats;
 
 	err = 0;
+	error_code = 0;
 	comm = args[0];
 	/*if(_strchr(comm, '/') == NULL)*/
 	if (comm[0] != '/' && comm[0] != '.')
@@ -73,6 +75,19 @@ int shell_exec(char **args, char *name, int circle)
 			result2 = strtok(NULL, ":");
 		}
 		comm = tokens3;
+	}
+	if (args[1] != NULL)
+	{
+		error_code = atoi(args[1]);
+		if (error_code < 0)
+		{
+			err_msg3(name, error_code, circle);
+		}
+		if (atoi(args[1]) == 0)
+		{
+			err_msg4(name, &args[1], circle);
+		}
+		return(1);
 	}
 	if (stat(comm, &stats) == -1)
 	{
@@ -99,7 +114,7 @@ int shell_exec(char **args, char *name, int circle)
 		if (c_pid < 0)
 		{
 			perror("Could not create a process");
-			exit (1);
+			return (1);
 		}
 		if (c_pid == 0)
 		{
@@ -115,7 +130,7 @@ int shell_exec(char **args, char *name, int circle)
 					err_msg2(&args[0], name, circle);
 					err = 127;
 				}
-				_exit(1);
+				_exit(err);
 			}
 		}
 		/*else if (c_pid < 0)
@@ -178,4 +193,14 @@ void err_msg2(char **args, char *name, int circle)
 	write(STDERR_FILENO, args[0], _strlen(args[0]));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, "not found\n", 10);
+}
+
+/**                                     * err_msg4 - print error for illegal exit codes                               * @name: argument input                * @status: exit code used
+ * @circle: number of times of execution
+ * Return: nothing
+ */
+                                       void err_msg4(char *name, char **args, int circle)                            {                                              write(STDOUT_FILENO, name, _strlen(name));                                    write(STDOUT_FILENO, ": ", 2);         _print_d(circle);                      write(STDOUT_FILENO, ": ", 2);         write(STDOUT_FILENO, "exit: Illegal number", 21);
+        write(STDOUT_FILENO, ": ", 2);
+        perror(args[1]);
+        write(STDOUT_FILENO, "\n", 1);
 }

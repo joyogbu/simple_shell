@@ -32,6 +32,8 @@ char **getPATH(const char *env);
 void _getenv(char **env);
 int shell_exec(char **args, char *name, int circle);
 int shell_exit(int ex_stat, char **args, char *lineptr, char **toks);
+void err_msg3(char *name, int status, int circle);
+void err_msg4(char *name, char **args, int circle);
 int change_dir(char **toks);
 int _get_char(void);
 
